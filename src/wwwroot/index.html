@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>@sampleName@</title>
-        <link rel="stylesheet" href="Content/@sampleName@.css" />
-        <script src="Content/@sampleName@.head.js"></script>
-    </head>
-    <body>
-        <div id="main"></div>
-        <script src="Content/@sampleName@.js"></script>
-    </body>
+<head>
+    <meta charset="utf-8" />
+    <title>HighlightJS</title>
+    <link rel="stylesheet" href="Content/HighlightJS.css" />
+    <script src="Content/HighlightJS.head.js"></script>
+</head>
+<body>
+    <h1>HighlightJS</h1>
+    <p>Automatically detects the language.</p>
+    <h2>F#:</h2>
+    <pre>
+        <code>
+let Main () =
+    let hljsConfig = WebSharper.HighlightJS.Options(TabReplace = "    ", UseBR = false)
+    Hljs.Configure(hljsConfig)
+    Hljs.InitHighlightingOnLoad()
+        </code>
+    </pre>
+    <h2>JavaScript:</h2>
+    <pre>
+        <code>
+int x = 6;
+for(int i = 0; i < 10; ++i){
+    if(x < 120){
+        x = x * 3;
+    }
+    else{
+        x = x - 10;
+    }
+    std::cout << x << std::endl;
+}
+        </code>
+    </pre>
+    <script src="Content/HighlightJS.js"></script>
+</body>
 </html>
