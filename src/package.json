@@ -1,0 +1,11 @@
+{
+  "name": "HighlightJS",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.19.9"
+  },
+  "dependencies": {
+    "highlight.js": "^11.12.0"
+  }
+}
