@@ -1,38 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>HighlightJS</title>
-    <link rel="stylesheet" href="Content/HighlightJS.css" />
-    <script src="Content/HighlightJS.head.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>highlight.js · WebSharper</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/github.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <script type="text/javascript" src="Scripts/HighlightJS.head.js"></script>
 </head>
 <body>
-    <h1>HighlightJS</h1>
-    <p>Automatically detects the language.</p>
-    <h2>F#:</h2>
-    <pre>
-        <code>
-let Main () =
-    let hljsConfig = WebSharper.HighlightJS.Options(TabReplace = "    ", UseBR = false)
-    Hljs.Configure(hljsConfig)
-    Hljs.InitHighlightingOnLoad()
-        </code>
-    </pre>
-    <h2>JavaScript:</h2>
-    <pre>
-        <code>
-int x = 6;
-for(int i = 0; i < 10; ++i){
-    if(x < 120){
-        x = x * 3;
-    }
-    else{
-        x = x - 10;
-    }
-    std::cout << x << std::endl;
-}
-        </code>
-    </pre>
-    <script src="Content/HighlightJS.js"></script>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-brand">
+        <span class="app-logo"><i class="fa-solid fa-code"></i></span>
+        <div class="app-titles">
+          <h1>highlight.js</h1>
+          <p>Syntax highlighting with WebSharper</p>
+        </div>
+      </div>
+      <a class="btn btn-ghost" href="https://github.com/websharper-samples/HighlightJS" target="_blank" rel="noreferrer">
+        <i class="fa-brands fa-github"></i><span>Source</span>
+      </a>
+    </header>
+
+    <main id="main" class="content"></main>
+  </div>
+
+  <script type="module" src="Scripts/HighlightJS.min.js"></script>
 </body>
 </html>
