@@ -16,7 +16,7 @@
         <span class="app-logo"><i class="fa-solid fa-code"></i></span>
         <div class="app-titles">
           <h1>highlight.js</h1>
-          <p>Syntax highlighting with WebSharper</p>
+          <p>Syntax highlighting with <a href="https://websharper.com" target="_blank" rel="noreferrer">WebSharper</a></p>
         </div>
       </div>
       <a class="btn btn-ghost" href="https://github.com/websharper-samples/HighlightJS" target="_blank" rel="noreferrer">
@@ -24,7 +24,30 @@
       </a>
     </header>
 
-    <main id="main" class="content"></main>
+    <main class="content">
+      <section class="card">
+        <div class="card-head">
+          <h2>Source</h2>
+          <p>Pick a language and edit the snippet — it is highlighted as you type.</p>
+        </div>
+        <div class="card-body">
+          <div class="lang-bar" ws-hole="Languages"></div>
+          <div class="editor-wrap">
+            <textarea class="code-input" ws-var="Source" spellcheck="false" rows="16"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Highlighted</h2>
+          <p>Rendered by highlight.js.</p>
+        </div>
+        <div class="card-body">
+          <pre class="code-block" ws-hole="Highlighted"></pre>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script type="module" src="Scripts/HighlightJS.min.js"></script>
