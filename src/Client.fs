@@ -4,6 +4,7 @@ open WebSharper
 open WebSharper.JavaScript
 open WebSharper.UI
 open WebSharper.UI.Html
+open WebSharper.UI.Templating
 open WebSharper.UI.Client
 open WebSharper.HighlightJS
 
@@ -167,6 +168,8 @@ done"""
         |> Option.map (fun s -> s.Code)
         |> Option.defaultValue ""
 
+    type Template = Templating.Template<"wwwroot/index.html", ClientLoad.FromDocument>
+
     [<SPAEntryPoint>]
     let Main () =
         // The core build has no languages, so register the ones we use.
@@ -183,8 +186,8 @@ done"""
         let isActive (id: string) : View<bool> =
             language.View |> View.Map (fun l -> l = id)
 
-        let langBar =
-            div [ attr.``class`` "lang-bar" ] [
+        let languages =
+            Doc.Concat [
                 for s in snippets ->
                     Doc.Button s.Name [
                         attr.``class`` "lang-btn"
@@ -192,38 +195,20 @@ done"""
                     ] (fun () -> select s.Id)
             ]
 
-        let editor =
-            div [ attr.``class`` "editor-wrap" ] [
-                Doc.InputType.TextArea [ attr.``class`` "code-input"; attr.spellcheck "false"; attr.rows "16" ] source
-            ]
-
         let highlighted =
-            pre [ attr.``class`` "code-block" ] [
-                code [
-                    on.viewUpdate
-                        (View.Map2 (fun l c -> l, c) language.View source.View)
-                        (fun el (lang, code) ->
-                            // highlight.js skips elements it has already processed.
-                            el.RemoveAttribute "data-highlighted"
-                            el.ClassName <- "language-" + lang
-                            el.TextContent <- code
-                            Hljs.HighlightElement(el))
-                ] []
-            ]
+            code [
+                on.viewUpdate
+                    (View.Map2 (fun l c -> l, c) language.View source.View)
+                    (fun el (lang, code) ->
+                        // highlight.js skips elements it has already processed.
+                        el.RemoveAttribute "data-highlighted"
+                        el.ClassName <- "language-" + lang
+                        el.TextContent <- code
+                        Hljs.HighlightElement(el))
+            ] []
 
-        let card title subtitle body =
-            section [ attr.``class`` "card" ] [
-                div [ attr.``class`` "card-head" ] [
-                    h2 [] [ text title ]
-                    p [] [ text subtitle ]
-                ]
-                div [ attr.``class`` "card-body" ] [ body ]
-            ]
-
-        Doc.Concat [
-            card "Source"
-                "Pick a language and edit the snippet — it is highlighted as you type."
-                (div [] [ langBar; editor ])
-            card "Highlighted" "Rendered by highlight.js." highlighted
-        ]
-        |> Doc.RunById "main"
+        Template()
+            .Languages(languages)
+            .Source(source)
+            .Highlighted(highlighted)
+            .Bind()
